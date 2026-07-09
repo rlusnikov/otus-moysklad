@@ -3,8 +3,11 @@ const fs = require('fs');
 const path = require('path');
 
 const port = Number(process.env.PORT || 3000);
-const indexPath = path.join(__dirname, 'public', 'index.html');
-const indexHtml = fs.readFileSync(indexPath);
+const publicPath = path.join(__dirname, 'public');
+const contentTypes = {
+  '.html': 'text/html; charset=utf-8',
+  '.js': 'application/javascript; charset=utf-8',
+};
 
 const server = http.createServer((req, res) => {
   const url = new URL(req.url || '/', 'http://localhost');
@@ -24,17 +27,38 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  res.writeHead(200, {
-    'Content-Type': 'text/html; charset=utf-8',
-    'Cache-Control': 'no-store',
-  });
+  const requestPath = url.pathname === '/' ? '/index.html' : url.pathname;
+  const filePath = path.normalize(path.join(publicPath, requestPath));
 
-  if (req.method === 'HEAD') {
-    res.end();
+  if (!filePath.startsWith(publicPath)) {
+    res.writeHead(404, {
+      'Content-Type': 'text/plain; charset=utf-8',
+    });
+    res.end('Not Found');
     return;
   }
 
-  res.end(indexHtml);
+  fs.readFile(filePath, (error, file) => {
+    if (error) {
+      res.writeHead(404, {
+        'Content-Type': 'text/plain; charset=utf-8',
+      });
+      res.end('Not Found');
+      return;
+    }
+
+    res.writeHead(200, {
+      'Content-Type': contentTypes[path.extname(filePath)] || 'application/octet-stream',
+      'Cache-Control': 'no-store',
+    });
+
+    if (req.method === 'HEAD') {
+      res.end();
+      return;
+    }
+
+    res.end(file);
+  });
 });
 
 server.listen(port, '127.0.0.1', () => {

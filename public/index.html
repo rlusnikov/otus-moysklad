@@ -31,7 +31,7 @@
               id="open-add-data-modal"
               class="inline-flex items-center justify-center rounded-full bg-[#2855AF] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#234a98] focus:outline-none focus:ring-2 focus:ring-[#2855AF]/30"
             >
-              (+) Add Data
+              Добавить
             </button>
           </div>
         </div>
@@ -39,32 +39,14 @@
           <table class="min-w-full divide-y divide-slate-200 text-left text-sm">
             <thead class="bg-slate-50 text-xs uppercase tracking-[0.18em] text-slate-500">
               <tr>
-                <th scope="col" class="px-6 py-4 font-semibold">PRODUCT NAME</th>
-                <th scope="col" class="px-6 py-4 font-semibold">COLOR</th>
-                <th scope="col" class="px-6 py-4 font-semibold">CATEGORY</th>
-                <th scope="col" class="px-6 py-4 font-semibold">PRICE</th>
+                <th scope="col" class="px-6 py-4 font-semibold">Наименование</th>
+                <th scope="col" class="px-6 py-4 font-semibold">ИНН</th>
+                <th scope="col" class="px-6 py-4 font-semibold">Адрес</th>
+                <th scope="col" class="px-6 py-4 font-semibold">КПП</th>
+                <th scope="col" class="px-6 py-4 font-semibold"></th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-slate-200 bg-white text-slate-700">
-              <tr class="hover:bg-slate-50/80">
-                <th scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-slate-900">Aurora Desk Lamp</th>
-                <td class="px-6 py-4">Midnight Blue</td>
-                <td class="px-6 py-4">Lighting</td>
-                <td class="px-6 py-4 font-medium text-slate-900">$89</td>
-              </tr>
-              <tr class="hover:bg-slate-50/80">
-                <th scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-slate-900">Studio Chair</th>
-                <td class="px-6 py-4">Graphite Gray</td>
-                <td class="px-6 py-4">Furniture</td>
-                <td class="px-6 py-4 font-medium text-slate-900">$149</td>
-              </tr>
-              <tr class="hover:bg-slate-50/80">
-                <th scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-slate-900">Accent Shelf</th>
-                <td class="px-6 py-4">Warm Oak</td>
-                <td class="px-6 py-4">Storage</td>
-                <td class="px-6 py-4 font-medium text-slate-900">$119</td>
-              </tr>
-            </tbody>
+            <tbody class="divide-y divide-slate-200 bg-white text-slate-700"></tbody>
           </table>
         </div>
       </div>
@@ -78,8 +60,8 @@
       <div class="w-full max-w-xl rounded-3xl border border-slate-200 bg-white shadow-2xl">
         <div class="flex items-start justify-between border-b border-slate-200 px-6 py-5">
           <div>
-            <h2 class="text-lg font-semibold text-slate-900">Add Data</h2>
-            <p class="mt-1 text-sm text-slate-500">Введите значения для новой строки таблицы.</p>
+            <h2 class="text-lg font-semibold text-slate-900">Контрагент</h2>
+            <p class="mt-1 text-sm text-slate-500">Заполните данные контрагента.</p>
           </div>
           <button
             type="button"
@@ -95,47 +77,45 @@
 
         <form id="add-data-form" class="space-y-4 px-6 py-5">
           <label class="block">
-            <span class="mb-1 block text-sm font-medium text-slate-700">PRODUCT NAME</span>
+            <span class="mb-1 block text-sm font-medium text-slate-700">Наименование</span>
             <input
-              name="productName"
+              name="name"
               type="text"
               required
-              placeholder="e.g. Horizon Lamp"
+              placeholder="Например, ООО &quot;Ромашка&quot;"
               class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-[#2855AF] focus:ring-2 focus:ring-[#2855AF]/15"
             />
           </label>
 
           <label class="block">
-            <span class="mb-1 block text-sm font-medium text-slate-700">COLOR</span>
+            <span class="mb-1 block text-sm font-medium text-slate-700">ИНН</span>
             <input
-              name="color"
+              name="inn"
               type="text"
               required
-              placeholder="e.g. Sky Blue"
+              placeholder="Например, 7701234567"
               class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-[#2855AF] focus:ring-2 focus:ring-[#2855AF]/15"
             />
           </label>
 
           <label class="block">
-            <span class="mb-1 block text-sm font-medium text-slate-700">CATEGORY</span>
+            <span class="mb-1 block text-sm font-medium text-slate-700">Адрес</span>
             <input
-              name="category"
+              name="address"
               type="text"
               required
-              placeholder="e.g. Decor"
+              placeholder="Например, г. Москва, ул. Ленина, 1"
               class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-[#2855AF] focus:ring-2 focus:ring-[#2855AF]/15"
             />
           </label>
 
           <label class="block">
-            <span class="mb-1 block text-sm font-medium text-slate-700">PRICE</span>
+            <span class="mb-1 block text-sm font-medium text-slate-700">КПП</span>
             <input
-              name="price"
-              type="number"
+              name="kpp"
+              type="text"
               required
-              min="0"
-              step="1"
-              placeholder="e.g. 99"
+              placeholder="Например, 770101001"
               class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-[#2855AF] focus:ring-2 focus:ring-[#2855AF]/15"
             />
           </label>
@@ -146,89 +126,19 @@
               id="cancel-add-data"
               class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
             >
-              Cancel
+              Отменить
             </button>
             <button
               type="submit"
               class="inline-flex items-center justify-center rounded-full bg-[#2855AF] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#234a98] focus:outline-none focus:ring-2 focus:ring-[#2855AF]/30"
             >
-              Save
+              Сохранить
             </button>
           </div>
         </form>
       </div>
     </div>
 
-    <script>
-      const openModalButton = document.getElementById('open-add-data-modal');
-      const modal = document.getElementById('add-data-modal');
-      const closeModalButton = document.getElementById('close-add-data-modal');
-      const cancelButton = document.getElementById('cancel-add-data');
-      const form = document.getElementById('add-data-form');
-      const tableBody = document.querySelector('tbody');
-
-      const openModal = () => {
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-        const firstField = form.querySelector('input[name="productName"]');
-        if (firstField) {
-          firstField.focus();
-        }
-      };
-
-      const closeModal = () => {
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-        form.reset();
-      };
-
-      openModalButton.addEventListener('click', openModal);
-      closeModalButton.addEventListener('click', closeModal);
-      cancelButton.addEventListener('click', closeModal);
-
-      modal.addEventListener('click', (event) => {
-        if (event.target === modal) {
-          closeModal();
-        }
-      });
-
-      document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape' && !modal.classList.contains('hidden')) {
-          closeModal();
-        }
-      });
-
-      form.addEventListener('submit', (event) => {
-        event.preventDefault();
-
-        const formData = new FormData(form);
-        const productName = String(formData.get('productName') || '').trim();
-        const color = String(formData.get('color') || '').trim();
-        const category = String(formData.get('category') || '').trim();
-        const priceValue = String(formData.get('price') || '').trim();
-
-        if (!productName || !color || !category || !priceValue) {
-          return;
-        }
-
-        const price = Number(priceValue);
-        const row = document.createElement('tr');
-        row.className = 'hover:bg-slate-50/80';
-        row.innerHTML = `
-          <th scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-slate-900"></th>
-          <td class="px-6 py-4"></td>
-          <td class="px-6 py-4"></td>
-          <td class="px-6 py-4 font-medium text-slate-900"></td>
-        `;
-
-        row.children[0].textContent = productName;
-        row.children[1].textContent = color;
-        row.children[2].textContent = category;
-        row.children[3].textContent = Number.isFinite(price) ? `$${price}` : priceValue;
-
-        tableBody.appendChild(row);
-        closeModal();
-      });
-    </script>
+    <script src="app.js"></script>
   </body>
 </html>
