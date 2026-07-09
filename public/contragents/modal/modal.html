@@ -1,0 +1,86 @@
+<div
+  class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/45 p-4 backdrop-blur-sm"
+  data-modal
+  aria-hidden="true"
+>
+  <div class="w-full max-w-xl rounded-3xl border border-slate-200 bg-white shadow-2xl">
+    <div class="flex items-start justify-between border-b border-slate-200 px-6 py-5">
+      <div>
+        <h2 class="text-lg font-semibold text-slate-900">Контрагент</h2>
+        <p class="mt-1 text-sm text-slate-500">Заполните данные контрагента.</p>
+      </div>
+      <button
+        type="button"
+        class="rounded-full p-2 text-slate-400 transition hover:bg-slate-100 hover:text-slate-600"
+        data-close-modal
+        aria-label="Закрыть"
+      >
+        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <form class="space-y-4 px-6 py-5" data-modal-form>
+      <label class="block">
+        <span class="mb-1 block text-sm font-medium text-slate-700">Наименование</span>
+        <input
+          name="name"
+          type="text"
+          required
+          placeholder='Например, ООО "Ромашка"'
+          class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-[#2855AF] focus:ring-2 focus:ring-[#2855AF]/15"
+        />
+      </label>
+
+      <label class="block">
+        <span class="mb-1 block text-sm font-medium text-slate-700">ИНН</span>
+        <input
+          name="inn"
+          type="text"
+          required
+          placeholder="Например, 7701234567"
+          class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-[#2855AF] focus:ring-2 focus:ring-[#2855AF]/15"
+        />
+      </label>
+
+      <label class="block">
+        <span class="mb-1 block text-sm font-medium text-slate-700">Адрес</span>
+        <input
+          name="address"
+          type="text"
+          required
+          placeholder="Например, г. Москва, ул. Ленина, 1"
+          class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-[#2855AF] focus:ring-2 focus:ring-[#2855AF]/15"
+        />
+      </label>
+
+      <label class="block">
+        <span class="mb-1 block text-sm font-medium text-slate-700">КПП</span>
+        <input
+          name="kpp"
+          type="text"
+          required
+          placeholder="Например, 770101001"
+          class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-[#2855AF] focus:ring-2 focus:ring-[#2855AF]/15"
+        />
+      </label>
+
+      <div class="flex flex-col-reverse gap-3 pt-2 sm:flex-row sm:justify-end">
+        <button
+          type="button"
+          class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+          data-cancel-modal
+        >
+          Отменить
+        </button>
+        <button
+          type="submit"
+          class="inline-flex items-center justify-center rounded-full bg-[#2855AF] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#234a98] focus:outline-none focus:ring-2 focus:ring-[#2855AF]/30"
+        >
+          Сохранить
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

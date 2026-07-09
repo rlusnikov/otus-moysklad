@@ -7,6 +7,7 @@ const publicPath = path.join(__dirname, 'public');
 const contentTypes = {
   '.html': 'text/html; charset=utf-8',
   '.js': 'application/javascript; charset=utf-8',
+  '.css': 'text/css; charset=utf-8',
 };
 
 const server = http.createServer((req, res) => {
