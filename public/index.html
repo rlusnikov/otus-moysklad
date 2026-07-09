@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>OTUS Moysklad</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="min-h-screen bg-slate-100 text-slate-900 antialiased">
+    <main class="mx-auto flex min-h-screen max-w-6xl items-center justify-center px-4 py-10 sm:px-6 lg:px-8">
+      <div class="w-full overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-lg">
+        <div class="border-b border-slate-200 px-5 py-4 sm:px-6">
+          <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <a
+              href="https://www.moysklad.ru/"
+              target="_blank"
+              rel="noreferrer noopener"
+              aria-label="МойСклад"
+              class="inline-flex items-center"
+            >
+              <img
+                src="https://www.moysklad.ru/includes/logo/logo.svg"
+                alt="МойСклад"
+                class="h-6 w-auto"
+              />
+            </a>
+
+            <button
+              type="button"
+              id="open-add-data-modal"
+              class="inline-flex items-center justify-center rounded-full bg-[#2855AF] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#234a98] focus:outline-none focus:ring-2 focus:ring-[#2855AF]/30"
+            >
+              (+) Add Data
+            </button>
+          </div>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-slate-200 text-left text-sm">
+            <thead class="bg-slate-50 text-xs uppercase tracking-[0.18em] text-slate-500">
+              <tr>
+                <th scope="col" class="px-6 py-4 font-semibold">PRODUCT NAME</th>
+                <th scope="col" class="px-6 py-4 font-semibold">COLOR</th>
+                <th scope="col" class="px-6 py-4 font-semibold">CATEGORY</th>
+                <th scope="col" class="px-6 py-4 font-semibold">PRICE</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 bg-white text-slate-700">
+              <tr class="hover:bg-slate-50/80">
+                <th scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-slate-900">Aurora Desk Lamp</th>
+                <td class="px-6 py-4">Midnight Blue</td>
+                <td class="px-6 py-4">Lighting</td>
+                <td class="px-6 py-4 font-medium text-slate-900">$89</td>
+              </tr>
+              <tr class="hover:bg-slate-50/80">
+                <th scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-slate-900">Studio Chair</th>
+                <td class="px-6 py-4">Graphite Gray</td>
+                <td class="px-6 py-4">Furniture</td>
+                <td class="px-6 py-4 font-medium text-slate-900">$149</td>
+              </tr>
+              <tr class="hover:bg-slate-50/80">
+                <th scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-slate-900">Accent Shelf</th>
+                <td class="px-6 py-4">Warm Oak</td>
+                <td class="px-6 py-4">Storage</td>
+                <td class="px-6 py-4 font-medium text-slate-900">$119</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+
+    <div
+      id="add-data-modal"
+      class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/45 p-4 backdrop-blur-sm"
+      aria-hidden="true"
+    >
+      <div class="w-full max-w-xl rounded-3xl border border-slate-200 bg-white shadow-2xl">
+        <div class="flex items-start justify-between border-b border-slate-200 px-6 py-5">
+          <div>
+            <h2 class="text-lg font-semibold text-slate-900">Add Data</h2>
+            <p class="mt-1 text-sm text-slate-500">Введите значения для новой строки таблицы.</p>
+          </div>
+          <button
+            type="button"
+            id="close-add-data-modal"
+            class="rounded-full p-2 text-slate-400 transition hover:bg-slate-100 hover:text-slate-600"
+            aria-label="Close modal"
+          >
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <form id="add-data-form" class="space-y-4 px-6 py-5">
+          <label class="block">
+            <span class="mb-1 block text-sm font-medium text-slate-700">PRODUCT NAME</span>
+            <input
+              name="productName"
+              type="text"
+              required
+              placeholder="e.g. Horizon Lamp"
+              class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-[#2855AF] focus:ring-2 focus:ring-[#2855AF]/15"
+            />
+          </label>
+
+          <label class="block">
+            <span class="mb-1 block text-sm font-medium text-slate-700">COLOR</span>
+            <input
+              name="color"
+              type="text"
+              required
+              placeholder="e.g. Sky Blue"
+              class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-[#2855AF] focus:ring-2 focus:ring-[#2855AF]/15"
+            />
+          </label>
+
+          <label class="block">
+            <span class="mb-1 block text-sm font-medium text-slate-700">CATEGORY</span>
+            <input
+              name="category"
+              type="text"
+              required
+              placeholder="e.g. Decor"
+              class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-[#2855AF] focus:ring-2 focus:ring-[#2855AF]/15"
+            />
+          </label>
+
+          <label class="block">
+            <span class="mb-1 block text-sm font-medium text-slate-700">PRICE</span>
+            <input
+              name="price"
+              type="number"
+              required
+              min="0"
+              step="1"
+              placeholder="e.g. 99"
+              class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-[#2855AF] focus:ring-2 focus:ring-[#2855AF]/15"
+            />
+          </label>
+
+          <div class="flex flex-col-reverse gap-3 pt-2 sm:flex-row sm:justify-end">
+            <button
+              type="button"
+              id="cancel-add-data"
+              class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="inline-flex items-center justify-center rounded-full bg-[#2855AF] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#234a98] focus:outline-none focus:ring-2 focus:ring-[#2855AF]/30"
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      const openModalButton = document.getElementById('open-add-data-modal');
+      const modal = document.getElementById('add-data-modal');
+      const closeModalButton = document.getElementById('close-add-data-modal');
+      const cancelButton = document.getElementById('cancel-add-data');
+      const form = document.getElementById('add-data-form');
+      const tableBody = document.querySelector('tbody');
+
+      const openModal = () => {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        const firstField = form.querySelector('input[name="productName"]');
+        if (firstField) {
+          firstField.focus();
+        }
+      };
+
+      const closeModal = () => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        form.reset();
+      };
+
+      openModalButton.addEventListener('click', openModal);
+      closeModalButton.addEventListener('click', closeModal);
+      cancelButton.addEventListener('click', closeModal);
+
+      modal.addEventListener('click', (event) => {
+        if (event.target === modal) {
+          closeModal();
+        }
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && !modal.classList.contains('hidden')) {
+          closeModal();
+        }
+      });
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(form);
+        const productName = String(formData.get('productName') || '').trim();
+        const color = String(formData.get('color') || '').trim();
+        const category = String(formData.get('category') || '').trim();
+        const priceValue = String(formData.get('price') || '').trim();
+
+        if (!productName || !color || !category || !priceValue) {
+          return;
+        }
+
+        const price = Number(priceValue);
+        const row = document.createElement('tr');
+        row.className = 'hover:bg-slate-50/80';
+        row.innerHTML = `
+          <th scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-slate-900"></th>
+          <td class="px-6 py-4"></td>
+          <td class="px-6 py-4"></td>
+          <td class="px-6 py-4 font-medium text-slate-900"></td>
+        `;
+
+        row.children[0].textContent = productName;
+        row.children[1].textContent = color;
+        row.children[2].textContent = category;
+        row.children[3].textContent = Number.isFinite(price) ? `$${price}` : priceValue;
+
+        tableBody.appendChild(row);
+        closeModal();
+      });
+    </script>
+  </body>
+</html>
