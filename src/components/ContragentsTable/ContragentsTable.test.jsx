@@ -32,9 +32,9 @@ describe('ContragentsTable', () => {
   it('renders contragents data', () => {
     render(<ContragentsTable contragents={contragents} onEdit={jest.fn()} onDelete={jest.fn()} />);
 
-    expect(screen.getByRole('cell', { name: 'ООО "Ромашка"' })).toBeInTheDocument();
+    expect(screen.getByRole('rowheader', { name: 'ООО "Ромашка"' })).toBeInTheDocument();
     expect(screen.getByRole('cell', { name: '77012345678' })).toBeInTheDocument();
-    expect(screen.getByRole('cell', { name: 'АО "Вектор"' })).toBeInTheDocument();
+    expect(screen.getByRole('rowheader', { name: 'АО "Вектор"' })).toBeInTheDocument();
   });
 
   it('calls onEdit when row is double clicked', async () => {
@@ -43,7 +43,7 @@ describe('ContragentsTable', () => {
 
     render(<ContragentsTable contragents={contragents} onEdit={onEdit} onDelete={jest.fn()} />);
 
-    await user.dblClick(screen.getByRole('cell', { name: 'ООО "Ромашка"' }));
+    await user.dblClick(screen.getByRole('rowheader', { name: 'ООО "Ромашка"' }));
 
     expect(onEdit).toHaveBeenCalledWith(contragents[0]);
   });

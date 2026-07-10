@@ -1,0 +1,78 @@
+.tableWrapper {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.875rem;
+}
+
+.head {
+  background-color: #f8fafc;
+  color: #64748b;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.headCell {
+  padding: 1rem 1.5rem;
+  font-weight: 600;
+}
+
+.body {
+  background-color: #ffffff;
+  color: #334155;
+}
+
+.row {
+  cursor: pointer;
+  border-top: 1px solid #e2e8f0;
+}
+
+.row:hover {
+  background-color: rgba(248, 250, 252, 0.8);
+}
+
+.cell {
+  padding: 1rem 1.5rem;
+}
+
+.nameCell {
+  composes: cell;
+  white-space: nowrap;
+  font-weight: 500;
+  color: #0f172a;
+}
+
+.kppCell {
+  composes: cell;
+  font-weight: 500;
+  color: #0f172a;
+}
+
+.actionsCell {
+  composes: cell;
+  text-align: right;
+}
+
+.deleteButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #fecaca;
+  border-radius: 9999px;
+  background-color: #ffffff;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #dc2626;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.deleteButton:hover {
+  background-color: #fef2f2;
+}
