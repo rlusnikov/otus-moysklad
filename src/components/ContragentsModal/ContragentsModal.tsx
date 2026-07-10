@@ -1,17 +1,25 @@
-import { useEffect, useState } from 'react';
+import { type ChangeEvent, type FormEvent, type MouseEvent, useEffect, useState } from 'react';
+import type { Contragent, ContragentFormValues, ValidationErrors } from '../../types/contragent';
 import { validateContragentForm } from '../../utils/validation';
 import styles from './ContragentsModal.module.css';
 
-const emptyForm = {
+const emptyForm: ContragentFormValues = {
   name: '',
   inn: '',
   address: '',
   kpp: '',
 };
 
-function ContragentsModal({ isOpen, counterparty, onSave, onClose }) {
-  const [formValues, setFormValues] = useState(emptyForm);
-  const [errors, setErrors] = useState({});
+interface ContragentsModalProps {
+  isOpen: boolean;
+  counterparty: Contragent | null;
+  onSave: (values: ContragentFormValues) => void;
+  onClose: () => void;
+}
+
+function ContragentsModal({ isOpen, counterparty, onSave, onClose }: ContragentsModalProps) {
+  const [formValues, setFormValues] = useState<ContragentFormValues>(emptyForm);
+  const [errors, setErrors] = useState<ValidationErrors>({});
 
   useEffect(() => {
     if (!isOpen) {
@@ -36,7 +44,7 @@ function ContragentsModal({ isOpen, counterparty, onSave, onClose }) {
     return null;
   }
 
-  const handleChange = (field) => (event) => {
+  const handleChange = (field: keyof ContragentFormValues) => (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
 
     setFormValues((current) => ({
@@ -53,10 +61,10 @@ function ContragentsModal({ isOpen, counterparty, onSave, onClose }) {
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const values = {
+    const values: ContragentFormValues = {
       name: formValues.name.trim(),
       inn: formValues.inn.trim(),
       address: formValues.address.trim(),
@@ -73,7 +81,7 @@ function ContragentsModal({ isOpen, counterparty, onSave, onClose }) {
     onSave(values);
   };
 
-  const handleOverlayClick = (event) => {
+  const handleOverlayClick = (event: MouseEvent<HTMLDivElement>) => {
     if (event.target === event.currentTarget) {
       onClose();
     }

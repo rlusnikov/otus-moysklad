@@ -1,9 +1,10 @@
 import { useState } from 'react';
+import type { Contragent, ContragentFormValues } from './types/contragent';
 import ContragentsModal from './components/ContragentsModal/ContragentsModal';
 import ContragentsTable from './components/ContragentsTable/ContragentsTable';
 import styles from './App.module.css';
 
-const initialContragents = [
+const initialContragents: Contragent[] = [
   {
     id: 1,
     name: 'ООО "Ромашка"',
@@ -28,9 +29,9 @@ const initialContragents = [
 ];
 
 function App() {
-  const [contragents, setContragents] = useState(initialContragents);
+  const [contragents, setContragents] = useState<Contragent[]>(initialContragents);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editingId, setEditingId] = useState(null);
+  const [editingId, setEditingId] = useState<number | null>(null);
   const [nextId, setNextId] = useState(
     Math.max(...initialContragents.map((contragent) => contragent.id)) + 1,
   );
@@ -44,12 +45,12 @@ function App() {
     setIsModalOpen(true);
   };
 
-  const handleEdit = (contragent) => {
+  const handleEdit = (contragent: Contragent) => {
     setEditingId(contragent.id);
     setIsModalOpen(true);
   };
 
-  const handleSave = (values) => {
+  const handleSave = (values: ContragentFormValues) => {
     if (editingId) {
       setContragents((current) =>
         current.map((contragent) =>
@@ -65,7 +66,7 @@ function App() {
     setEditingId(null);
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = (id: number) => {
     setContragents((current) => current.filter((contragent) => contragent.id !== id));
   };
 

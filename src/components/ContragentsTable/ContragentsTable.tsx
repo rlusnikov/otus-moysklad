@@ -1,6 +1,13 @@
+import type { Contragent } from '../../types/contragent';
 import styles from './ContragentsTable.module.css';
 
-function ContragentsTable({ contragents, onEdit, onDelete }) {
+interface ContragentsTableProps {
+  contragents: Contragent[];
+  onEdit: (contragent: Contragent) => void;
+  onDelete: (id: number) => void;
+}
+
+function ContragentsTable({ contragents, onEdit, onDelete }: ContragentsTableProps) {
   return (
     <div className={styles.tableWrapper}>
       <table className={styles.table}>

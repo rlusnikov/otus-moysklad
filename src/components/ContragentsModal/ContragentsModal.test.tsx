@@ -1,8 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import type { Contragent } from '../../types/contragent';
 import ContragentsModal from './ContragentsModal';
 
-const counterparty = {
+const counterparty: Contragent = {
   id: 1,
   name: 'ООО "Ромашка"',
   inn: '77012345678',

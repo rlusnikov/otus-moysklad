@@ -1,8 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import type { Contragent } from '../../types/contragent';
 import ContragentsTable from './ContragentsTable';
 
-const contragents = [
+const contragents: Contragent[] = [
   {
     id: 1,
     name: 'ООО "Ромашка"',
