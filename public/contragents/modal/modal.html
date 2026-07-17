@@ -27,10 +27,11 @@
         <input
           name="name"
           type="text"
-          required
           placeholder='Например, ООО "Ромашка"'
           class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-[#2855AF] focus:ring-2 focus:ring-[#2855AF]/15"
+          data-field="name"
         />
+        <span class="mt-1 hidden text-sm text-red-600" data-error="name"></span>
       </label>
 
       <label class="block">
@@ -38,10 +39,8 @@
         <input
           name="inn"
           type="text"
-          required
           inputmode="numeric"
           maxlength="11"
-          pattern="\d{11}"
           placeholder="11 цифр, например 77012345678"
           class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-[#2855AF] focus:ring-2 focus:ring-[#2855AF]/15"
           data-field="inn"
@@ -54,10 +53,11 @@
         <input
           name="address"
           type="text"
-          required
           placeholder="Например, г. Москва, ул. Ленина, 1"
           class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-[#2855AF] focus:ring-2 focus:ring-[#2855AF]/15"
+          data-field="address"
         />
+        <span class="mt-1 hidden text-sm text-red-600" data-error="address"></span>
       </label>
 
       <label class="block">
@@ -65,10 +65,8 @@
         <input
           name="kpp"
           type="text"
-          required
           inputmode="numeric"
           maxlength="9"
-          pattern="\d{9}"
           placeholder="9 цифр, например 770101001"
           class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-[#2855AF] focus:ring-2 focus:ring-[#2855AF]/15"
           data-field="kpp"

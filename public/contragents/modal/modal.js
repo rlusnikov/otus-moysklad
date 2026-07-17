@@ -38,7 +38,9 @@ export async function createContragentsModal(container, { onSave }) {
   const form = container.querySelector('[data-modal-form]');
   const closeButton = container.querySelector('[data-close-modal]');
   const cancelButton = container.querySelector('[data-cancel-modal]');
+  const nameInput = form.elements.name;
   const innInput = form.elements.inn;
+  const addressInput = form.elements.address;
   const kppInput = form.elements.kpp;
 
   const fieldErrorClasses = ['border-red-300', 'focus:border-red-500', 'focus:ring-red-200'];
@@ -73,7 +75,9 @@ export async function createContragentsModal(container, { onSave }) {
   };
 
   const clearValidation = () => {
+    clearFieldError('name');
     clearFieldError('inn');
+    clearFieldError('address');
     clearFieldError('kpp');
   };
 
@@ -83,7 +87,13 @@ export async function createContragentsModal(container, { onSave }) {
     const values = getFormValues(form);
     let isValid = true;
 
-    if (!values.name || !values.address) {
+    if (!values.name) {
+      setFieldError('name', 'Укажите наименование');
+      isValid = false;
+    }
+
+    if (!values.address) {
+      setFieldError('address', 'Укажите адрес');
       isValid = false;
     }
 
@@ -136,7 +146,9 @@ export async function createContragentsModal(container, { onSave }) {
   closeButton.addEventListener('click', close);
   cancelButton.addEventListener('click', close);
 
+  nameInput.addEventListener('input', () => clearFieldError('name'));
   innInput.addEventListener('input', () => clearFieldError('inn'));
+  addressInput.addEventListener('input', () => clearFieldError('address'));
   kppInput.addEventListener('input', () => clearFieldError('kpp'));
 
   modal.addEventListener('click', (event) => {
