@@ -13,7 +13,7 @@ const emptyForm: ContragentFormValues = {
 interface ContragentsModalProps {
   isOpen: boolean;
   counterparty: Contragent | null;
-  onSave: (values: ContragentFormValues) => void;
+  onSave: (values: ContragentFormValues) => void | Promise<void>;
   onClose: () => void;
 }
 
@@ -61,7 +61,7 @@ function ContragentsModal({ isOpen, counterparty, onSave, onClose }: Contragents
     }
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const values: ContragentFormValues = {
@@ -78,7 +78,7 @@ function ContragentsModal({ isOpen, counterparty, onSave, onClose }: Contragents
       return;
     }
 
-    onSave(values);
+    await onSave(values);
   };
 
   const handleOverlayClick = (event: MouseEvent<HTMLDivElement>) => {

@@ -69,6 +69,16 @@
   background-color: #234a98;
 }
 
+.status {
+  padding: 1rem 1.5rem;
+  color: #64748b;
+}
+
+.error {
+  padding: 1rem 1.5rem;
+  color: #dc2626;
+}
+
 @media (min-width: 640px) {
   .header {
     padding: 1rem 1.5rem;
