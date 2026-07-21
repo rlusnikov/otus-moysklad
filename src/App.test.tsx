@@ -1,10 +1,13 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { resetContragentsApiMock } from './api/contragentsApi';
 import { ContragentsProvider } from './context/ContragentsContext';
 import App from './App';
 
 jest.mock('./api/contragentsApi');
+
+const { resetContragentsApiMock } = jest.requireMock('./api/contragentsApi') as typeof import(
+  './api/__mocks__/contragentsApi'
+);
 
 function renderApp() {
   return render(
