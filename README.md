@@ -1,16 +1,33 @@
 # otus-moysklad
 
-Минимальный Node.js проект с одной страницей, на которой показана только таблица в светлой теме.
+React-приложение для управления контрагентами на TypeScript.
 
 ## Запуск
 
 ```bash
+npm install
+npm run build
 npm run serve
 ```
 
 После запуска страница доступна по адресу `http://localhost:3000`.
 
+Для разработки:
+
+```bash
+npm run dev
+```
+
+## Тесты
+
+```bash
+npm test
+```
+
 ## Структура
 
-- `server.js` - простой HTTP-сервер на Node.js
-- `public/index.html` - страница с таблицей
+- `src/App.tsx` — главный компонент с состоянием контрагентов
+- `src/types/contragent.ts` — типы данных контрагента
+- `src/components/ContragentsTable/` — таблица контрагентов
+- `src/components/ContragentsModal/` — модальное окно редактирования
+- `server.js` — HTTP-сервер для раздачи собранного приложения из `dist/`

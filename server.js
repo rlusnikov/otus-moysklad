@@ -3,11 +3,12 @@ const fs = require('fs');
 const path = require('path');
 
 const port = Number(process.env.PORT || 3000);
-const publicPath = path.join(__dirname, 'public');
+const distPath = path.join(__dirname, 'dist');
 const contentTypes = {
   '.html': 'text/html; charset=utf-8',
   '.js': 'application/javascript; charset=utf-8',
   '.css': 'text/css; charset=utf-8',
+  '.svg': 'image/svg+xml',
 };
 
 const server = http.createServer((req, res) => {
@@ -29,9 +30,9 @@ const server = http.createServer((req, res) => {
   }
 
   const requestPath = url.pathname === '/' ? '/index.html' : url.pathname;
-  const filePath = path.normalize(path.join(publicPath, requestPath));
+  const filePath = path.normalize(path.join(distPath, requestPath));
 
-  if (!filePath.startsWith(publicPath)) {
+  if (!filePath.startsWith(distPath)) {
     res.writeHead(404, {
       'Content-Type': 'text/plain; charset=utf-8',
     });
