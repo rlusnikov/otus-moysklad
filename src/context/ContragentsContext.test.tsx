@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 import * as contragentsApi from '../api/contragentsApi';
 import { ContragentsProvider, useContragents } from './ContragentsContext';
 import { mockContragents } from '../test/mockContragentsApi';
-import { resetContragentsApiMock } from "../api/__mocks__/contragentsApi.ts";
+import { resetContragentsApiMock } from "../api/__mocks__/contragentsApi";
 
 jest.mock('../api/contragentsApi');
 

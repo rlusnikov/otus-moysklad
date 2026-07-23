@@ -13,11 +13,18 @@ const emptyForm: ContragentFormValues = {
 interface ContragentsModalProps {
   isOpen: boolean;
   counterparty: Contragent | null;
+  operationError?: string | null;
   onSave: (values: ContragentFormValues) => void | Promise<void>;
   onClose: () => void;
 }
 
-function ContragentsModal({ isOpen, counterparty, onSave, onClose }: ContragentsModalProps) {
+function ContragentsModal({
+  isOpen,
+  counterparty,
+  operationError = null,
+  onSave,
+  onClose,
+}: ContragentsModalProps) {
   const [formValues, setFormValues] = useState<ContragentFormValues>(emptyForm);
   const [errors, setErrors] = useState<ValidationErrors>({});
 
@@ -110,6 +117,12 @@ function ContragentsModal({ isOpen, counterparty, onSave, onClose }: Contragents
         </div>
 
         <form className={styles.form} onSubmit={handleSubmit}>
+          {operationError ? (
+            <p className={styles.error} role="alert">
+              {operationError}
+            </p>
+          ) : null}
+
           <label className={styles.field}>
             <span className={styles.label}>Наименование</span>
             <input

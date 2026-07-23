@@ -10,37 +10,53 @@ function App() {
     useContragents();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingId, setEditingId] = useState<number | null>(null);
+  const [operationError, setOperationError] = useState<string | null>(null);
 
-  const editingCounterparty = editingId
+  const editingCounterparty = editingId !== null
     ? contragents.find((contragent) => contragent.id === editingId) ?? null
     : null;
 
   const handleOpenAdd = () => {
+    setOperationError(null);
     setEditingId(null);
     setIsModalOpen(true);
   };
 
   const handleEdit = (contragent: Contragent) => {
+    setOperationError(null);
     setEditingId(contragent.id);
     setIsModalOpen(true);
   };
 
   const handleSave = async (values: ContragentFormValues) => {
-    if (editingId) {
-      await updateContragent(editingId, values);
-    } else {
-      await createContragent(values);
-    }
+    setOperationError(null);
 
-    setIsModalOpen(false);
-    setEditingId(null);
+    try {
+      if (editingId !== null) {
+        await updateContragent(editingId, values);
+      } else {
+        await createContragent(values);
+      }
+
+      setIsModalOpen(false);
+      setEditingId(null);
+    } catch {
+      setOperationError('Не удалось сохранить контрагента. Попробуйте ещё раз');
+    }
   };
 
   const handleDelete = async (id: number) => {
-    await deleteContragent(id);
+    setOperationError(null);
+
+    try {
+      await deleteContragent(id);
+    } catch {
+      setOperationError('Не удалось удалить контрагента. Попробуйте ещё раз');
+    }
   };
 
   const handleClose = () => {
+    setOperationError(null);
     setIsModalOpen(false);
     setEditingId(null);
   };
@@ -73,6 +89,11 @@ function App() {
 
           {loading ? <p className={styles.status}>Загрузка контрагентов...</p> : null}
           {error ? <p className={styles.error}>{error}</p> : null}
+          {operationError && !isModalOpen ? (
+            <p className={styles.error} role="alert">
+              {operationError}
+            </p>
+          ) : null}
 
           {!loading && !error ? (
             <ContragentsTable
@@ -87,6 +108,7 @@ function App() {
       <ContragentsModal
         isOpen={isModalOpen}
         counterparty={editingCounterparty}
+        operationError={operationError}
         onSave={handleSave}
         onClose={handleClose}
       />
