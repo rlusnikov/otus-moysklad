@@ -1,21 +1,29 @@
 # otus-moysklad
 
-React-приложение для управления контрагентами на TypeScript.
+React-приложение для управления контрагентами на TypeScript с json-server и React Context.
 
 ## Запуск
 
 ```bash
 npm install
 npm run build
-npm run serve
+npm run start
 ```
 
-После запуска страница доступна по адресу `http://localhost:3000`.
+Команда `start` одновременно запускает:
+- json-server на `http://127.0.0.1:3001`
+- HTTP-сервер приложения на `http://127.0.0.1:3000`
 
 Для разработки:
 
 ```bash
-npm run dev
+npm run dev:all
+```
+
+Только API:
+
+```bash
+npm run api
 ```
 
 ## Тесты
@@ -26,8 +34,11 @@ npm test
 
 ## Структура
 
-- `src/App.tsx` — главный компонент с состоянием контрагентов
+- `db.json` — данные контрагентов для json-server
+- `src/context/ContragentsContext.tsx` — контекст с API получения, создания, обновления и удаления
+- `src/api/contragentsApi.ts` — HTTP-клиент для json-server
+- `src/App.tsx` — главный компонент
 - `src/types/contragent.ts` — типы данных контрагента
 - `src/components/ContragentsTable/` — таблица контрагентов
 - `src/components/ContragentsModal/` — модальное окно редактирования
-- `server.js` — HTTP-сервер для раздачи собранного приложения из `dist/`
+- `server.js` — HTTP-сервер для `dist/` и проксирования `/api` на json-server

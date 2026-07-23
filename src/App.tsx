@@ -1,76 +1,62 @@
 import { useState } from 'react';
 import type { Contragent, ContragentFormValues } from './types/contragent';
+import { useContragents } from './context/ContragentsContext';
 import ContragentsModal from './components/ContragentsModal/ContragentsModal';
 import ContragentsTable from './components/ContragentsTable/ContragentsTable';
 import styles from './App.module.css';
 
-const initialContragents: Contragent[] = [
-  {
-    id: 1,
-    name: 'ООО "Ромашка"',
-    inn: '77012345678',
-    address: 'г. Москва, ул. Ленина, 1',
-    kpp: '770101001',
-  },
-  {
-    id: 2,
-    name: 'АО "Вектор"',
-    inn: '78123456789',
-    address: 'г. Санкт-Петербург, Невский проспект, 25',
-    kpp: '781201001',
-  },
-  {
-    id: 3,
-    name: 'ИП Иванов Иван Иванович',
-    inn: '54012345678',
-    address: 'г. Новосибирск, Красный проспект, 10',
-    kpp: '540101001',
-  },
-];
-
 function App() {
-  const [contragents, setContragents] = useState<Contragent[]>(initialContragents);
+  const { contragents, loading, error, createContragent, updateContragent, deleteContragent } =
+    useContragents();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingId, setEditingId] = useState<number | null>(null);
-  const [nextId, setNextId] = useState(
-    Math.max(...initialContragents.map((contragent) => contragent.id)) + 1,
-  );
+  const [operationError, setOperationError] = useState<string | null>(null);
 
-  const editingCounterparty = editingId
+  const editingCounterparty = editingId !== null
     ? contragents.find((contragent) => contragent.id === editingId) ?? null
     : null;
 
   const handleOpenAdd = () => {
+    setOperationError(null);
     setEditingId(null);
     setIsModalOpen(true);
   };
 
   const handleEdit = (contragent: Contragent) => {
+    setOperationError(null);
     setEditingId(contragent.id);
     setIsModalOpen(true);
   };
 
-  const handleSave = (values: ContragentFormValues) => {
-    if (editingId) {
-      setContragents((current) =>
-        current.map((contragent) =>
-          contragent.id === editingId ? { ...contragent, ...values } : contragent,
-        ),
-      );
-    } else {
-      setContragents((current) => [...current, { id: nextId, ...values }]);
-      setNextId((current) => current + 1);
-    }
+  const handleSave = async (values: ContragentFormValues) => {
+    setOperationError(null);
 
-    setIsModalOpen(false);
-    setEditingId(null);
+    try {
+      if (editingId !== null) {
+        await updateContragent(editingId, values);
+      } else {
+        await createContragent(values);
+      }
+
+      setIsModalOpen(false);
+      setEditingId(null);
+    } catch {
+      setOperationError('Не удалось сохранить контрагента. Попробуйте ещё раз');
+    }
   };
 
-  const handleDelete = (id: number) => {
-    setContragents((current) => current.filter((contragent) => contragent.id !== id));
+  const handleDelete = async (id: number) => {
+    setOperationError(null);
+
+    try {
+      await deleteContragent(id);
+    } catch {
+      setOperationError('Не удалось удалить контрагента. Попробуйте ещё раз');
+    }
   };
 
   const handleClose = () => {
+    setOperationError(null);
     setIsModalOpen(false);
     setEditingId(null);
   };
@@ -101,17 +87,28 @@ function App() {
             </div>
           </header>
 
-          <ContragentsTable
-            contragents={contragents}
-            onEdit={handleEdit}
-            onDelete={handleDelete}
-          />
+          {loading ? <p className={styles.status}>Загрузка контрагентов...</p> : null}
+          {error ? <p className={styles.error}>{error}</p> : null}
+          {operationError && !isModalOpen ? (
+            <p className={styles.error} role="alert">
+              {operationError}
+            </p>
+          ) : null}
+
+          {!loading && !error ? (
+            <ContragentsTable
+              contragents={contragents}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
+            />
+          ) : null}
         </div>
       </main>
 
       <ContragentsModal
         isOpen={isModalOpen}
         counterparty={editingCounterparty}
+        operationError={operationError}
         onSave={handleSave}
         onClose={handleClose}
       />

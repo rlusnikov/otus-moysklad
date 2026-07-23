@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 const port = Number(process.env.PORT || 3000);
+const apiPort = Number(process.env.API_PORT || 3001);
 const distPath = path.join(__dirname, 'dist');
 const contentTypes = {
   '.html': 'text/html; charset=utf-8',
@@ -11,12 +12,43 @@ const contentTypes = {
   '.svg': 'image/svg+xml',
 };
 
+function proxyApiRequest(req, res, requestUrl) {
+  const proxyReq = http.request(
+    {
+      hostname: '127.0.0.1',
+      port: apiPort,
+      path: requestUrl.pathname.replace(/^\/api/, '') + requestUrl.search,
+      method: req.method,
+      headers: {
+        ...req.headers,
+        host: `127.0.0.1:${apiPort}`,
+      },
+    },
+    (proxyRes) => {
+      res.writeHead(proxyRes.statusCode || 500, proxyRes.headers);
+      proxyRes.pipe(res);
+    },
+  );
+
+  proxyReq.on('error', () => {
+    res.writeHead(502, { 'Content-Type': 'text/plain; charset=utf-8' });
+    res.end('API server is unavailable');
+  });
+
+  req.pipe(proxyReq);
+}
+
 const server = http.createServer((req, res) => {
   const url = new URL(req.url || '/', 'http://localhost');
 
   if (url.pathname === '/favicon.ico') {
     res.writeHead(204);
     res.end();
+    return;
+  }
+
+  if (url.pathname.startsWith('/api/')) {
+    proxyApiRequest(req, res, url);
     return;
   }
 
