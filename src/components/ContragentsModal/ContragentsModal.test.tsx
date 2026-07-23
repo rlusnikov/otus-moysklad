@@ -13,14 +13,7 @@ const counterparty: Contragent = {
 
 describe('ContragentsModal', () => {
   it('renders modal when isOpen is true', () => {
-    render(
-      <ContragentsModal
-        isOpen
-        counterparty={null}
-        onSave={jest.fn()}
-        onClose={jest.fn()}
-      />,
-    );
+    render(<ContragentsModal isOpen counterparty={null} onSave={jest.fn()} onClose={jest.fn()} />);
 
     expect(screen.getByRole('heading', { name: 'Контрагент' })).toBeInTheDocument();
     expect(screen.getByLabelText('Наименование')).toBeInTheDocument();
@@ -62,14 +55,7 @@ describe('ContragentsModal', () => {
     const user = userEvent.setup();
     const onSave = jest.fn();
 
-    render(
-      <ContragentsModal
-        isOpen
-        counterparty={null}
-        onSave={onSave}
-        onClose={jest.fn()}
-      />,
-    );
+    render(<ContragentsModal isOpen counterparty={null} onSave={onSave} onClose={jest.fn()} />);
 
     await user.type(screen.getByLabelText('Наименование'), '  ООО "Тест"  ');
     await user.type(screen.getByLabelText('ИНН'), '1234567894');
@@ -91,14 +77,7 @@ describe('ContragentsModal', () => {
     const user = userEvent.setup();
     const onSave = jest.fn();
 
-    render(
-      <ContragentsModal
-        isOpen
-        counterparty={null}
-        onSave={onSave}
-        onClose={jest.fn()}
-      />,
-    );
+    render(<ContragentsModal isOpen counterparty={null} onSave={onSave} onClose={jest.fn()} />);
 
     await user.type(screen.getByLabelText('Наименование'), 'ООО "Тест"');
     await user.type(screen.getByLabelText('ИНН'), '123');
@@ -115,14 +94,7 @@ describe('ContragentsModal', () => {
     const user = userEvent.setup();
     const onSave = jest.fn();
 
-    render(
-      <ContragentsModal
-        isOpen
-        counterparty={null}
-        onSave={onSave}
-        onClose={jest.fn()}
-      />,
-    );
+    render(<ContragentsModal isOpen counterparty={null} onSave={onSave} onClose={jest.fn()} />);
 
     await user.type(screen.getByLabelText('Наименование'), 'ООО "Тест"');
     await user.type(screen.getByLabelText('ИНН'), '7707083890');
@@ -139,14 +111,7 @@ describe('ContragentsModal', () => {
     const user = userEvent.setup();
     const onSave = jest.fn();
 
-    render(
-      <ContragentsModal
-        isOpen
-        counterparty={null}
-        onSave={onSave}
-        onClose={jest.fn()}
-      />,
-    );
+    render(<ContragentsModal isOpen counterparty={null} onSave={onSave} onClose={jest.fn()} />);
 
     await user.type(screen.getByLabelText('ИНН'), '1234567894');
     await user.type(screen.getByLabelText('КПП'), '123456789');
@@ -176,12 +141,7 @@ describe('ContragentsModal', () => {
     const onClose = jest.fn();
 
     render(
-      <ContragentsModal
-        isOpen
-        counterparty={counterparty}
-        onSave={jest.fn()}
-        onClose={onClose}
-      />,
+      <ContragentsModal isOpen counterparty={counterparty} onSave={jest.fn()} onClose={onClose} />,
     );
 
     await user.click(screen.getByRole('button', { name: 'Отменить' }));

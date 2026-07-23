@@ -39,7 +39,9 @@ export function ContragentsProvider({ children }: ContragentsProviderProps) {
       const data = await contragentsApi.getContragents();
       setContragents(data);
     } catch (loadError) {
-      setError(loadError instanceof Error ? loadError.message : 'Не удалось загрузить контрагентов');
+      setError(
+        loadError instanceof Error ? loadError.message : 'Не удалось загрузить контрагентов',
+      );
     } finally {
       setLoading(false);
     }

@@ -47,7 +47,10 @@ interface FormFieldProps {
 
 function FormField({ name, label, placeholder, inputMode, maxLength }: FormFieldProps) {
   return (
-    <Field<string, HTMLInputElement, ContragentFormValues> name={name} parse={(value: string) => value}>
+    <Field<string, HTMLInputElement, ContragentFormValues>
+      name={name}
+      parse={(value: string) => value}
+    >
       {({ input, meta }: FieldRenderProps<string, HTMLInputElement>) => {
         const error = meta.submitFailed && meta.error ? String(meta.error) : null;
 
@@ -106,7 +109,12 @@ function ContragentsModal({
       aria-hidden="false"
       role="presentation"
     >
-      <div className={styles.dialog} role="dialog" aria-modal="true" aria-labelledby="contragent-modal-title">
+      <div
+        className={styles.dialog}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="contragent-modal-title"
+      >
         <div className={styles.header}>
           <div>
             <h2 id="contragent-modal-title" className={styles.title}>
@@ -114,8 +122,19 @@ function ContragentsModal({
             </h2>
             <p className={styles.subtitle}>Заполните данные контрагента.</p>
           </div>
-          <button type="button" className={styles.closeButton} onClick={onClose} aria-label="Закрыть">
-            <svg className={styles.closeIcon} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
+          <button
+            type="button"
+            className={styles.closeButton}
+            onClick={onClose}
+            aria-label="Закрыть"
+          >
+            <svg
+              className={styles.closeIcon}
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth="1.8"
+            >
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
@@ -145,7 +164,11 @@ function ContragentsModal({
                 placeholder="10 или 12 цифр, например 7707083893"
               />
 
-              <FormField name="address" label="Адрес" placeholder="Например, г. Москва, ул. Ленина, 1" />
+              <FormField
+                name="address"
+                label="Адрес"
+                placeholder="Например, г. Москва, ул. Ленина, 1"
+              />
 
               <FormField
                 name="kpp"

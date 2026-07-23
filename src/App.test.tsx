@@ -172,6 +172,8 @@ describe('App', () => {
     await user.click(screen.getByRole('button', { name: 'Отменить' }));
 
     expect(screen.getByRole('rowheader', { name: 'ООО "Ромашка"' })).toBeInTheDocument();
-    expect(screen.queryByRole('rowheader', { name: 'ООО "Не должно сохраниться"' })).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('rowheader', { name: 'ООО "Не должно сохраниться"' }),
+    ).not.toBeInTheDocument();
   });
 });

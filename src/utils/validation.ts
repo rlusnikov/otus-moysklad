@@ -8,7 +8,10 @@ const INN_11_COEFFICIENTS = [7, 2, 4, 10, 3, 5, 9, 4, 6, 8];
 const INN_12_COEFFICIENTS = [3, 7, 2, 4, 10, 3, 5, 9, 4, 6, 8];
 
 function getChecksum(digits: number[], coefficients: number[]): number {
-  const sum = coefficients.reduce((total, coefficient, index) => total + coefficient * digits[index], 0);
+  const sum = coefficients.reduce(
+    (total, coefficient, index) => total + coefficient * digits[index],
+    0,
+  );
   return (sum % 11) % 10;
 }
 
