@@ -53,13 +53,13 @@ describe('App', () => {
 
     await user.click(screen.getByRole('button', { name: 'Добавить' }));
     await user.type(screen.getByLabelText('Наименование'), 'ООО "Новый"');
-    await user.type(screen.getByLabelText('ИНН'), '99999999999');
+    await user.type(screen.getByLabelText('ИНН'), '9999999998');
     await user.type(screen.getByLabelText('Адрес'), 'г. Казань');
     await user.type(screen.getByLabelText('КПП'), '999999999');
     await user.click(screen.getByRole('button', { name: 'Сохранить' }));
 
     expect(await screen.findByRole('rowheader', { name: 'ООО "Новый"' })).toBeInTheDocument();
-    expect(screen.getByRole('cell', { name: '99999999999' })).toBeInTheDocument();
+    expect(screen.getByRole('cell', { name: '9999999998' })).toBeInTheDocument();
   });
 
   it('shows an error and keeps the modal open when save fails', async () => {
@@ -71,7 +71,7 @@ describe('App', () => {
 
     await user.click(screen.getByRole('button', { name: 'Добавить' }));
     await user.type(screen.getByLabelText('Наименование'), 'ООО "Новый"');
-    await user.type(screen.getByLabelText('ИНН'), '99999999999');
+    await user.type(screen.getByLabelText('ИНН'), '9999999998');
     await user.type(screen.getByLabelText('Адрес'), 'г. Казань');
     await user.type(screen.getByLabelText('КПП'), '999999999');
     await user.click(screen.getByRole('button', { name: 'Сохранить' }));
@@ -107,7 +107,7 @@ describe('App', () => {
       {
         id: 0,
         name: 'ООО "Нулевой"',
-        inn: '99999999999',
+        inn: '9999999998',
         address: 'г. Казань',
         kpp: '999999999',
       },
@@ -121,7 +121,7 @@ describe('App', () => {
 
     expect(updateContragent).toHaveBeenCalledWith(0, {
       name: 'ООО "Нулевой"',
-      inn: '99999999999',
+      inn: '9999999998',
       address: 'г. Казань',
       kpp: '999999999',
     });

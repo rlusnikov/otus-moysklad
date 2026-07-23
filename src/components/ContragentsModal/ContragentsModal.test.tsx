@@ -6,7 +6,7 @@ import ContragentsModal from './ContragentsModal';
 const counterparty: Contragent = {
   id: 1,
   name: 'ООО "Ромашка"',
-  inn: '77012345678',
+  inn: '7707083893',
   address: 'г. Москва, ул. Ленина, 1',
   kpp: '770101001',
 };
@@ -53,7 +53,7 @@ describe('ContragentsModal', () => {
     );
 
     expect(screen.getByLabelText('Наименование')).toHaveValue('ООО "Ромашка"');
-    expect(screen.getByLabelText('ИНН')).toHaveValue('77012345678');
+    expect(screen.getByLabelText('ИНН')).toHaveValue('7707083893');
     expect(screen.getByLabelText('Адрес')).toHaveValue('г. Москва, ул. Ленина, 1');
     expect(screen.getByLabelText('КПП')).toHaveValue('770101001');
   });
@@ -72,7 +72,7 @@ describe('ContragentsModal', () => {
     );
 
     await user.type(screen.getByLabelText('Наименование'), '  ООО "Тест"  ');
-    await user.type(screen.getByLabelText('ИНН'), '12345678901');
+    await user.type(screen.getByLabelText('ИНН'), '1234567894');
     await user.type(screen.getByLabelText('Адрес'), '  г. Москва  ');
     await user.type(screen.getByLabelText('КПП'), '123456789');
     await user.click(screen.getByRole('button', { name: 'Сохранить' }));
@@ -80,14 +80,14 @@ describe('ContragentsModal', () => {
     await waitFor(() => {
       expect(onSave).toHaveBeenCalledWith({
         name: 'ООО "Тест"',
-        inn: '12345678901',
+        inn: '1234567894',
         address: 'г. Москва',
         kpp: '123456789',
       });
     });
   });
 
-  it('shows validation errors for invalid INN and KPP', async () => {
+  it('shows validation errors for short INN and KPP', async () => {
     const user = userEvent.setup();
     const onSave = jest.fn();
 
@@ -106,8 +106,32 @@ describe('ContragentsModal', () => {
     await user.type(screen.getByLabelText('КПП'), '12');
     await user.click(screen.getByRole('button', { name: 'Сохранить' }));
 
-    expect(screen.getByText('ИНН должен содержать 11 цифр')).toBeInTheDocument();
+    expect(screen.getByText('ИНН должен содержать 10 или 12 цифр')).toBeInTheDocument();
     expect(screen.getByText('КПП должен содержать 9 цифр')).toBeInTheDocument();
+    expect(onSave).not.toHaveBeenCalled();
+  });
+
+  it('shows validation errors for incorrect INN checksum and KPP structure', async () => {
+    const user = userEvent.setup();
+    const onSave = jest.fn();
+
+    render(
+      <ContragentsModal
+        isOpen
+        counterparty={null}
+        onSave={onSave}
+        onClose={jest.fn()}
+      />,
+    );
+
+    await user.type(screen.getByLabelText('Наименование'), 'ООО "Тест"');
+    await user.type(screen.getByLabelText('ИНН'), '7707083890');
+    await user.type(screen.getByLabelText('Адрес'), 'г. Москва');
+    await user.type(screen.getByLabelText('КПП'), '770100001');
+    await user.click(screen.getByRole('button', { name: 'Сохранить' }));
+
+    expect(screen.getByText('ИНН указан некорректно')).toBeInTheDocument();
+    expect(screen.getByText('КПП указан некорректно')).toBeInTheDocument();
     expect(onSave).not.toHaveBeenCalled();
   });
 
@@ -124,7 +148,7 @@ describe('ContragentsModal', () => {
       />,
     );
 
-    await user.type(screen.getByLabelText('ИНН'), '12345678901');
+    await user.type(screen.getByLabelText('ИНН'), '1234567894');
     await user.type(screen.getByLabelText('КПП'), '123456789');
     await user.click(screen.getByRole('button', { name: 'Сохранить' }));
 

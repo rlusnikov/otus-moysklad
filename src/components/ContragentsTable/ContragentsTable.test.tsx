@@ -7,14 +7,14 @@ const contragents: Contragent[] = [
   {
     id: 1,
     name: 'ООО "Ромашка"',
-    inn: '77012345678',
+    inn: '7707083893',
     address: 'г. Москва, ул. Ленина, 1',
     kpp: '770101001',
   },
   {
     id: 2,
     name: 'АО "Вектор"',
-    inn: '78123456789',
+    inn: '7812345675',
     address: 'г. Санкт-Петербург, Невский проспект, 25',
     kpp: '781201001',
   },
@@ -34,7 +34,7 @@ describe('ContragentsTable', () => {
     render(<ContragentsTable contragents={contragents} onEdit={jest.fn()} onDelete={jest.fn()} />);
 
     expect(screen.getByRole('rowheader', { name: 'ООО "Ромашка"' })).toBeInTheDocument();
-    expect(screen.getByRole('cell', { name: '77012345678' })).toBeInTheDocument();
+    expect(screen.getByRole('cell', { name: '7707083893' })).toBeInTheDocument();
     expect(screen.getByRole('rowheader', { name: 'АО "Вектор"' })).toBeInTheDocument();
   });
 

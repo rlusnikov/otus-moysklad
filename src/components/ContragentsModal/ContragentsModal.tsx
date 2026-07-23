@@ -141,8 +141,8 @@ function ContragentsModal({
                 name="inn"
                 label="ИНН"
                 inputMode="numeric"
-                maxLength={11}
-                placeholder="11 цифр, например 77012345678"
+                maxLength={12}
+                placeholder="10 или 12 цифр, например 7707083893"
               />
 
               <FormField name="address" label="Адрес" placeholder="Например, г. Москва, ул. Ленина, 1" />

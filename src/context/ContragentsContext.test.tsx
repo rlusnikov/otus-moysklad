@@ -37,7 +37,7 @@ describe('ContragentsContext', () => {
     await act(async () => {
       await result.current.createContragent({
         name: 'ООО "Новый"',
-        inn: '99999999999',
+        inn: '9999999998',
         address: 'г. Казань',
         kpp: '999999999',
       });
@@ -50,7 +50,7 @@ describe('ContragentsContext', () => {
     await act(async () => {
       await result.current.updateContragent(1, {
         name: 'ООО "Обновлено"',
-        inn: '77012345678',
+        inn: '7707083893',
         address: 'г. Москва, ул. Ленина, 1',
         kpp: '770101001',
       });
