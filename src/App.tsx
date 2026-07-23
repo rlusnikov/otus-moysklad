@@ -12,9 +12,10 @@ function App() {
   const [editingId, setEditingId] = useState<number | null>(null);
   const [operationError, setOperationError] = useState<string | null>(null);
 
-  const editingCounterparty = editingId !== null
-    ? contragents.find((contragent) => contragent.id === editingId) ?? null
-    : null;
+  const editingCounterparty =
+    editingId !== null
+      ? (contragents.find((contragent) => contragent.id === editingId) ?? null)
+      : null;
 
   const handleOpenAdd = () => {
     setOperationError(null);

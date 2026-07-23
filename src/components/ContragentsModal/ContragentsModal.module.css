@@ -46,7 +46,9 @@
   padding: 0.5rem;
   color: #94a3b8;
   cursor: pointer;
-  transition: background-color 0.15s ease, color 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
 }
 
 .closeButton:hover {
@@ -86,7 +88,9 @@
   padding: 0.75rem 1rem;
   color: #0f172a;
   outline: none;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .input::placeholder {
@@ -130,7 +134,9 @@
   font-size: 0.875rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .buttonSecondary {

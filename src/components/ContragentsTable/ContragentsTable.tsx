@@ -30,11 +30,7 @@ function ContragentsTable({ contragents, onEdit, onDelete }: ContragentsTablePro
         </thead>
         <tbody className={styles.body}>
           {contragents.map((contragent) => (
-            <tr
-              key={contragent.id}
-              className={styles.row}
-              onDoubleClick={() => onEdit(contragent)}
-            >
+            <tr key={contragent.id} className={styles.row} onDoubleClick={() => onEdit(contragent)}>
               <th scope="row" className={styles.nameCell}>
                 {contragent.name}
               </th>
