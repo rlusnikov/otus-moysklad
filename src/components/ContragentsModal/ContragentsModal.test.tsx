@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import type { Contragent } from '../../types/contragent';
 import ContragentsModal from './ContragentsModal';
@@ -71,17 +71,19 @@ describe('ContragentsModal', () => {
       />,
     );
 
-    await user.type(screen.getByLabelText('Наименование'), 'ООО "Тест"');
+    await user.type(screen.getByLabelText('Наименование'), '  ООО "Тест"  ');
     await user.type(screen.getByLabelText('ИНН'), '12345678901');
-    await user.type(screen.getByLabelText('Адрес'), 'г. Москва');
+    await user.type(screen.getByLabelText('Адрес'), '  г. Москва  ');
     await user.type(screen.getByLabelText('КПП'), '123456789');
     await user.click(screen.getByRole('button', { name: 'Сохранить' }));
 
-    expect(onSave).toHaveBeenCalledWith({
-      name: 'ООО "Тест"',
-      inn: '12345678901',
-      address: 'г. Москва',
-      kpp: '123456789',
+    await waitFor(() => {
+      expect(onSave).toHaveBeenCalledWith({
+        name: 'ООО "Тест"',
+        inn: '12345678901',
+        address: 'г. Москва',
+        kpp: '123456789',
+      });
     });
   });
 
@@ -107,6 +109,42 @@ describe('ContragentsModal', () => {
     expect(screen.getByText('ИНН должен содержать 11 цифр')).toBeInTheDocument();
     expect(screen.getByText('КПП должен содержать 9 цифр')).toBeInTheDocument();
     expect(onSave).not.toHaveBeenCalled();
+  });
+
+  it('shows validation errors for required fields', async () => {
+    const user = userEvent.setup();
+    const onSave = jest.fn();
+
+    render(
+      <ContragentsModal
+        isOpen
+        counterparty={null}
+        onSave={onSave}
+        onClose={jest.fn()}
+      />,
+    );
+
+    await user.type(screen.getByLabelText('ИНН'), '12345678901');
+    await user.type(screen.getByLabelText('КПП'), '123456789');
+    await user.click(screen.getByRole('button', { name: 'Сохранить' }));
+
+    expect(screen.getByText('Наименование обязательно')).toBeInTheDocument();
+    expect(screen.getByText('Адрес обязателен')).toBeInTheDocument();
+    expect(onSave).not.toHaveBeenCalled();
+  });
+
+  it('renders operation error separately from validation errors', () => {
+    render(
+      <ContragentsModal
+        isOpen
+        counterparty={null}
+        operationError="Не удалось сохранить контрагента"
+        onSave={jest.fn()}
+        onClose={jest.fn()}
+      />,
+    );
+
+    expect(screen.getByRole('alert')).toHaveTextContent('Не удалось сохранить контрагента');
   });
 
   it('calls onClose when cancel button is clicked', async () => {

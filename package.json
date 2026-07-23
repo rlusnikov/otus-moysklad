@@ -16,8 +16,10 @@
     "node": ">=18"
   },
   "dependencies": {
+    "final-form": "^5.0.1",
     "react": "^19.2.7",
-    "react-dom": "^19.2.7"
+    "react-dom": "^19.2.7",
+    "react-final-form": "^7.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.26.10",
